@@ -1,0 +1,32 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("POSTGRES_PRISMA_URL")
+    directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Notification {
+    id               Int              @id @default(autoincrement())
+    type             NotificationType
+    read             Boolean          @default(false)
+    releaseNumber    String?
+    comeFromPersonId Int?
+    comeFrom         Person?          @relation(fields: [comeFromPersonId], references: [id])
+}
+
+enum NotificationType {
+    PlatformUpdate
+    CommentTag
+    AccessGranted
+    JoinWorkspace
+}
+
+model Person {
+    id           Int            @id @default(autoincrement())
+    displayName  String
+    avatarUrl    String
+    Notification Notification[]
+}
