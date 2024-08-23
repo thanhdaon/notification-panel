@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Scripts
 
-## Getting Started
+### `dev`
 
-First, run the development server:
+Starts the development server using Next.js. This script enables hot-reloading and provides a development environment for building and testing your application.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### `start`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Starts the development server using Next.js. This script enables hot-reloading and provides a development environment for building and testing your application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### `build`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Runs a sequence of commands to prepare the application for production:
 
-## Learn More
+1. prisma generate: Generates Prisma client code based on your Prisma schema.
+2. prisma migrate deploy: Applies pending migrations to the database.
+3. next build: Builds the Next.js application for production.
 
-To learn more about Next.js, take a look at the following resources:
+### `db:generate`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Generates Prisma client code based on your Prisma schema. This is typically used when you make changes to your schema and need to update the client code.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### `db:seed`
 
-## Deploy on Vercel
+Runs the database seeding script located at server/db/seed.ts. This script populates the database with initial data required for the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### `db:studio`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Opens Prisma Studio, a GUI for interacting with your database. This allows you to view and manage your data through an interactive interface.
+
+### `db:migrate-dev`
+
+Runs a sequence of commands for development database management:
+
+1. prisma migrate dev: Applies any pending migrations and updates the database schema in development.
+2. prisma generate: Generates Prisma client code based on the updated schema.
+
+## Techstack
+
+- NextJS 14 (App Router)
+- TypeScript
+- React 18
+- PostgreSQL (Vercel)
+- Prisma
+- tRPC
+- Tailwind CSS (no other libraries)
+- Radix UI (Shadcn-ui components collection build on top of Radix UI and Tailwindcss)
+- React Hook Form and Zod
+- useQuery
+- Deployment on Vercel
+
+## Additional UX
+
+- [x] Loading bar to indicate background Fetching of RQ
+- [x] Optimistic update when user click to notification.
