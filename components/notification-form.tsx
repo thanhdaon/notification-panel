@@ -55,11 +55,10 @@ export function NotificationCreateForm() {
 
   const create = api.notifications.create.useMutation({
     onSuccess: () => {
-      console.log("okokok");
       toast.success("Notification created");
     },
     onError: (error) => {
-      alert(error.message);
+      toast.error(error.message);
     },
     onSettled: async () => {
       await utils.notifications.invalidate();
@@ -72,6 +71,7 @@ export function NotificationCreateForm() {
     defaultValues: {
       releaseNumber: "",
     },
+    shouldUnregister: true,
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {

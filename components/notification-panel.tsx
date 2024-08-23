@@ -77,10 +77,17 @@ interface NotificationProps {
   id: number;
   read: boolean;
   type: $Enums.NotificationType;
+  releaseNumber: string | null;
   comeFrom: Person | null;
 }
 
-function NotificationItem({ read, type, comeFrom, id }: NotificationProps) {
+function NotificationItem({
+  read,
+  type,
+  comeFrom,
+  id,
+  releaseNumber,
+}: NotificationProps) {
   const queryClient = useQueryClient();
   const queryKey = getQueryKey(api.notifications.getMany, undefined, "query");
 
@@ -122,7 +129,7 @@ function NotificationItem({ read, type, comeFrom, id }: NotificationProps) {
   }
 
   return (
-    <ActionWrapper type={type}>
+    <ActionWrapper type={type} releaseNumber={releaseNumber}>
       <div
         className={`flex items-start space-x-4 p-4 border border-border  ${
           read ? "bg-background" : "bg-muted"
@@ -161,12 +168,14 @@ function NotificationItem({ read, type, comeFrom, id }: NotificationProps) {
 function ActionWrapper({
   children,
   type,
+  releaseNumber,
 }: {
   children: ReactNode;
   type: $Enums.NotificationType;
+  releaseNumber: string | null;
 }) {
   if (type === $Enums.NotificationType.PlatformUpdate) {
-    return <div onClick={() => alert("1.2.3")}>{children}</div>;
+    return <div onClick={() => alert(releaseNumber)}>{children}</div>;
   }
 
   if (type === $Enums.NotificationType.CommentTag) {

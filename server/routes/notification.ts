@@ -47,6 +47,8 @@ export const notificationRouter = createRouter({
             releaseNumber: input.releaseNumber,
           },
         });
+
+        return;
       }
 
       if (input.comeFromPersonId === undefined) {
