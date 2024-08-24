@@ -44,7 +44,7 @@ import { toast } from "sonner";
 
 const FormSchema = z.object({
   type: z.nativeEnum($Enums.NotificationType),
-  releaseNumber: z.string().optional(),
+  releaseNumber: z.string().min(1).optional(),
   comeFromPersonId: z.number().optional(),
 });
 
@@ -138,7 +138,7 @@ function renderFormItemNotificationType({
   field: { value, onChange },
 }: UseControllerReturn<z.infer<typeof FormSchema>, "type">) {
   return (
-    <FormItem className="grid grid-cols-4 items-center gap-4">
+    <FormItem className="grid grid-cols-4 items-center gap-x-4">
       <FormLabel className="text-right">Type</FormLabel>
       <Select value={value} onValueChange={onChange}>
         <FormControl>
@@ -161,7 +161,7 @@ function renderFormItemNotificationType({
           </SelectItem>
         </SelectContent>
       </Select>
-      <FormMessage />
+      <FormMessage className="col-span-4 text-right" />
     </FormItem>
   );
 }
@@ -170,12 +170,12 @@ function renderFormItemReleaseNumber({
   field,
 }: UseControllerReturn<z.infer<typeof FormSchema>, "releaseNumber">) {
   return (
-    <FormItem className="grid grid-cols-4 items-center gap-4">
+    <FormItem className="grid grid-cols-4 items-center gap-x-4">
       <FormLabel className="text-right">Release number</FormLabel>
       <FormControl>
         <Input placeholder="release number" className="col-span-3" {...field} />
       </FormControl>
-      <FormMessage />
+      <FormMessage className="col-span-4 text-right" />
     </FormItem>
   );
 }

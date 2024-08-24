@@ -8,7 +8,7 @@ async function main() {
   await prisma.notification.deleteMany();
 
   const createds = await prisma.person.createManyAndReturn({
-    data: generatePeople(100),
+    data: generatePeople(30),
   });
 
   const personIds = createds.map((p) => p.id);
