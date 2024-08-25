@@ -11,6 +11,7 @@ export const notificationRouter = createRouter({
       orderBy: {
         id: "desc",
       },
+      take: 100,
     });
     const total = await ctx.prisma.notification.count();
     return { total, data };
